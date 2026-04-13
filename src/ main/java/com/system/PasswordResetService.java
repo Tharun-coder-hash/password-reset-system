@@ -1,4 +1,5 @@
 package com.system;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,11 +10,22 @@ public class PasswordResetService {
         otpStore.put(email, otp);
     }
 
-    public boolean resetPassword(String email, String inputOtp, String newPassword) {
-        if (otpStore.containsKey(email) && otpStore.get(email).equals(inputOtp)) {
-            otpStore.remove(email); // OTP used
-            return true;
+    public boolean verifyOtp(String email, String inputOtp) {
+        return otpStore.containsKey(email) && otpStore.get(email).equals(inputOtp);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("========================================");
+        System.out.println("Password Reset Service is now RUNNING...");
+        System.out.println("========================================");
+
+        // This keeps the Docker container running
+        try {
+            while (true) {
+                Thread.sleep(10000);
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Service interrupted.");
         }
-        return false;
     }
 }
